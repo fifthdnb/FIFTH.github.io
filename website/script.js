@@ -284,6 +284,24 @@ document.addEventListener('DOMContentLoaded', () => {
         ? '/FIFTH.github.io' 
         : '';
     
+    // Fix favicon
+    const favicon = document.getElementById('favicon');
+    if (favicon) {
+        favicon.href = `${basePath}/svg/fifth_LOGO_2.svg`;
+    }
+    
+    // Fix loading logo
+    const pulseLogos = document.querySelectorAll('.pulse-logo');
+    pulseLogos.forEach(logo => {
+        logo.src = `${basePath}/svg/fifth_LOGO_2.svg`;
+    });
+    
+    // Fix hero logo
+    const heroLogo = document.querySelector('.hero-logo');
+    if (heroLogo) {
+        heroLogo.src = `${basePath}/svg/fifth_LOGO_2_WHITE.svg`;
+    }
+    
     // Fix logo images for GitHub Pages
     const logoImages = document.querySelectorAll('.logo img');
     logoImages.forEach(img => {
@@ -293,13 +311,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
     
-    // Fix hero logo
-    const heroLogo = document.querySelector('.hero-logo');
-    if (heroLogo) {
-        const src = heroLogo.getAttribute('src');
-        if (src && src.startsWith('svg/')) {
-            heroLogo.src = basePath ? `${basePath}/${src}` : src;
-        }
+    // Fix photo divider background
+    const photoDividerBio = document.getElementById('photo-divider-bio');
+    if (photoDividerBio) {
+        photoDividerBio.style.backgroundImage = `url('${basePath}/img/Biography_achtergrond.JPG')`;
     }
     
     loadReleases();
