@@ -254,15 +254,17 @@ if (typeof AOS !== 'undefined') {
 document.addEventListener('DOMContentLoaded', () => {
     loadReleases();
     loadAgenda();
+    loadBlogPosts();
 });
 
 // Blog functionality - Load and display blog posts
-if (document.getElementById('blog-grid')) {
+function loadBlogPosts() {
+    const blogGrid = document.getElementById('blog-grid');
+    if (!blogGrid) return;
+    
     fetch('website/posts.json')
         .then(response => response.json())
         .then(posts => {
-            const blogGrid = document.getElementById('blog-grid');
-            
             posts.forEach((post, index) => {
                 const card = document.createElement('a');
                 card.href = `website/post.html?id=${post.id}`;
@@ -281,6 +283,11 @@ if (document.getElementById('blog-grid')) {
                 
                 blogGrid.appendChild(card);
             });
+            
+            // Refresh AOS animations
+            if (typeof AOS !== 'undefined') {
+                AOS.refresh();
+            }
         })
         .catch(error => console.error('Error loading blog posts:', error));
 }
@@ -299,16 +306,20 @@ if (document.getElementById('post-content')) {
                     // Update page title
                     document.title = `${post.title} - FIFTH`;
                     
-                    // Load markdown content
-                    fetch(post.file)
+                    // Load markdown content from blog-posts folder (relative to website folder)
+                    const markdownPath = `blog-posts/${postId}.md`;
+                    fetch(markdownPath)
                         .then(response => response.text())
                         .then(markdown => {
                             const postContent = document.getElementById('post-content');
                             
+                            // Fix image path for post.html (needs ../ since it's in website folder)
+                            const imagePath = post.image.startsWith('img/') ? '../' + post.image : post.image;
+                            
                             // Create post header with image, title and date
                             const postHeader = `
                                 <div class="post-header">
-                                    <img src="${post.image}" alt="${post.title}" class="post-image">
+                                    <img src="${imagePath}" alt="${post.title}" class="post-image">
                                     <h1>${post.title}</h1>
                                     <p class="post-date">${post.date}</p>
                                 </div>
