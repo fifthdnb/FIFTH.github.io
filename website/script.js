@@ -1,10 +1,10 @@
 // Hero Slideshow
 const heroImages = [
-    '../img/DSC01392.jpg',
-    '../img/DSC01428.jpg',
-    '../img/DSC01595.jpg',
-    '../img/DSC01632.jpg',
-    '../img/DSC01647.jpg'
+    'img/DSC01392.jpg',
+    'img/DSC01428.jpg',
+    'img/DSC01595.jpg',
+    'img/DSC01632.jpg',
+    'img/DSC01647.jpg'
 ];
 
 let currentImageIndex = 0;
@@ -36,7 +36,7 @@ function loadReleases() {
     
     if (!releasesGrid) return;
     
-    fetch('releases.json')
+    fetch('website/releases.json')
         .then(response => {
             if (!response.ok) throw new Error('Failed to load releases');
             return response.json();
@@ -97,7 +97,7 @@ function loadAgenda() {
     
     if (!agendaEvents) return;
     
-    fetch('agenda.json')
+    fetch('website/agenda.json')
         .then(response => {
             if (!response.ok) throw new Error('Failed to load agenda');
             return response.json();
@@ -258,14 +258,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Blog functionality - Load and display blog posts
 if (document.getElementById('blog-grid')) {
-    fetch('posts.json')
+    fetch('website/posts.json')
         .then(response => response.json())
         .then(posts => {
             const blogGrid = document.getElementById('blog-grid');
             
             posts.forEach((post, index) => {
                 const card = document.createElement('a');
-                card.href = `post.html?id=${post.id}`;
+                card.href = `website/post.html?id=${post.id}`;
                 card.className = 'blog-card';
                 card.setAttribute('data-aos', 'fade-zoom-in');
                 card.setAttribute('data-aos-delay', (index * 100).toString());
