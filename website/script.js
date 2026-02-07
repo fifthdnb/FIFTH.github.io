@@ -36,10 +36,10 @@ function applyConfig() {
 }
 
 const heroImages = [
-    `${basePath ? basePath + '/' : ''}img/Homepage_1.jpg`,
-    `${basePath ? basePath + '/' : ''}img/Homepage_2.jpg`,
-    `${basePath ? basePath + '/' : ''}img/Homepage_3.jpg`,
-    `${basePath ? basePath + '/' : ''}img/Homepage_4.jpg`,
+    `${basePath ? basePath + '/' : './'}img/Homepage_1.jpg`,
+    `${basePath ? basePath + '/' : './'}img/Homepage_2.jpg`,
+    `${basePath ? basePath + '/' : './'}img/Homepage_3.jpg`,
+    `${basePath ? basePath + '/' : './'}img/Homepage_4.jpg`,
 ];
 
 let currentImageIndex = 0;
@@ -73,7 +73,7 @@ function loadReleases() {
     
     // Detect if we're on the homepage or music.html page
     const isInWebsiteFolder = window.location.pathname.includes('/website/');
-    const basePath = isInWebsiteFolder ? '..' : (window.location.pathname.replace('/index.html', '').replace(/\/$/, ''));
+    const basePath = isInWebsiteFolder ? '..' : '.';
     const jsonPath = isInWebsiteFolder ? '../content/releases.json' : `${basePath}/content/releases.json`;
     
     fetch(jsonPath)
@@ -152,7 +152,7 @@ function loadAgenda() {
     if (!agendaEvents) return;
     
     // Get base path for GitHub Pages compatibility
-    const basePath = window.location.pathname.replace('/index.html', '').replace(/\/$/, '');
+    const basePath = '.';
     
     fetch(`${basePath}/content/agenda.json`)
         .then(response => {
@@ -314,7 +314,7 @@ function loadBlogPosts() {
     if (!blogGrid) return;
     
     // Get base path for GitHub Pages compatibility
-    const basePath = window.location.pathname.replace('/index.html', '').replace(/\/$/, '');
+    const basePath = '.';
     
     fetch(`${basePath}/content/posts.json`)
         .then(response => response.json())
