@@ -1,11 +1,13 @@
 // Hero Slideshow
-const basePath = window.location.pathname.replace('/index.html', '').replace(/\/$/, '');
+const basePath = window.location.pathname.includes('/FIFTH-Website/') 
+    ? '/FIFTH-Website' 
+    : '';
 const heroImages = [
-    `${basePath}/img/DSC01392.jpg`,
-    `${basePath}/img/DSC01428.jpg`,
-    `${basePath}/img/DSC01595.jpg`,
-    `${basePath}/img/DSC01632.jpg`,
-    `${basePath}/img/DSC01647.jpg`
+    `${basePath ? basePath + '/' : ''}img/DSC01392.jpg`,
+    `${basePath ? basePath + '/' : ''}img/DSC01428.jpg`,
+    `${basePath ? basePath + '/' : ''}img/DSC01595.jpg`,
+    `${basePath ? basePath + '/' : ''}img/DSC01632.jpg`,
+    `${basePath ? basePath + '/' : ''}img/DSC01647.jpg`
 ];
 
 let currentImageIndex = 0;
@@ -261,6 +263,28 @@ if (typeof AOS !== 'undefined') {
 
 // Load releases and agenda on page load
 document.addEventListener('DOMContentLoaded', () => {
+    const basePath = window.location.pathname.includes('/FIFTH-Website/') 
+        ? '/FIFTH-Website' 
+        : '';
+    
+    // Fix logo images for GitHub Pages
+    const logoImages = document.querySelectorAll('.logo img');
+    logoImages.forEach(img => {
+        const src = img.getAttribute('src');
+        if (src && src.startsWith('svg/')) {
+            img.src = basePath ? `${basePath}/${src}` : src;
+        }
+    });
+    
+    // Fix hero logo
+    const heroLogo = document.querySelector('.hero-logo');
+    if (heroLogo) {
+        const src = heroLogo.getAttribute('src');
+        if (src && src.startsWith('svg/')) {
+            heroLogo.src = basePath ? `${basePath}/${src}` : src;
+        }
+    }
+    
     loadReleases();
     loadAgenda();
     loadBlogPosts();
