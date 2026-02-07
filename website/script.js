@@ -2,12 +2,44 @@
 const basePath = window.location.pathname.includes('/FIFTH-Website/') 
     ? '/FIFTH-Website' 
     : '';
+
+// Apply configuration to all links with data attributes
+function applyConfig() {
+    // Social media links
+    document.querySelectorAll('[data-social]').forEach(link => {
+        const platform = link.getAttribute('data-social');
+        if (CONFIG.socials[platform]) {
+            link.href = CONFIG.socials[platform];
+        }
+    });
+    
+    // Contact links
+    document.querySelectorAll('[data-contact]').forEach(link => {
+        const type = link.getAttribute('data-contact');
+        if (CONFIG.contact[type]) {
+            if (type === 'email') {
+                link.href = `mailto:${CONFIG.contact[type]}`;
+                link.textContent = CONFIG.contact[type];
+            } else if (type === 'website') {
+                link.href = CONFIG.contact[type];
+                link.textContent = CONFIG.contact[type];
+            } else if (type === 'pressKit') {
+                link.href = CONFIG.contact[type];
+            }
+        }
+    });
+    
+    // Copyright year
+    document.querySelectorAll('[data-year]').forEach(element => {
+        element.textContent = CONFIG.site.copyrightYear;
+    });
+}
+
 const heroImages = [
-    `${basePath ? basePath + '/' : ''}img/DSC01392.jpg`,
-    `${basePath ? basePath + '/' : ''}img/DSC01428.jpg`,
-    `${basePath ? basePath + '/' : ''}img/DSC01595.jpg`,
-    `${basePath ? basePath + '/' : ''}img/DSC01632.jpg`,
-    `${basePath ? basePath + '/' : ''}img/DSC01647.jpg`
+    `${basePath ? basePath + '/' : ''}img/Homepage_1.jpg`,
+    `${basePath ? basePath + '/' : ''}img/Homepage_2.jpg`,
+    `${basePath ? basePath + '/' : ''}img/Homepage_3.jpg`,
+    `${basePath ? basePath + '/' : ''}img/Homepage_4.jpg`,
 ];
 
 let currentImageIndex = 0;
@@ -42,7 +74,7 @@ function loadReleases() {
     // Detect if we're on the homepage or music.html page
     const isInWebsiteFolder = window.location.pathname.includes('/website/');
     const basePath = isInWebsiteFolder ? '..' : (window.location.pathname.replace('/index.html', '').replace(/\/$/, ''));
-    const jsonPath = isInWebsiteFolder ? 'releases.json' : `${basePath}/website/releases.json`;
+    const jsonPath = isInWebsiteFolder ? '../content/releases.json' : `${basePath}/content/releases.json`;
     
     fetch(jsonPath)
         .then(response => {
@@ -67,18 +99,32 @@ function loadReleases() {
                 
                 card.innerHTML = `
                     <div class="release-image-wrapper">
-                        <img src="${isInWebsiteFolder ? '../' : basePath + '/'}${release.image}" alt="${release.title}" class="release-image" loading="lazy">
+                        <img src="${isInWebsiteFolder ? '../' : basePath + '/'}${release.image}" alt="${release.artist} - ${release.album}" class="release-image" loading="lazy">
                         <div class="release-overlay">
-                            <a href="https://open.spotify.com/artist/2nkPDrBTpqCFWeK3ZMLmlF" target="_blank" class="overlay-icon" aria-label="Listen on Spotify">
-                                <i class="fa-brands fa-spotify"></i>
-                            </a>
-                            <a href="https://www.beatport.com/artist/fifth/742392" target="_blank" class="overlay-icon" aria-label="View on Beatport">
-                                <i class="fa-solid fa-b"></i>
-                            </a>
+                            <div class="overlay-icons">
+                                <a href="${release.spotify || 'https://open.spotify.com/artist/2nkPDrBTpqCFWeK3ZMLmlF'}" target="_blank" class="overlay-icon" aria-label="Listen on Spotify">
+                                    <i class="fa-brands fa-spotify"></i>
+                                </a>
+                                <a href="${release.soundcloud || '#'}" target="_blank" class="overlay-icon" aria-label="Listen on SoundCloud">
+                                    <i class="fa-brands fa-soundcloud"></i>
+                                </a>
+                                <a href="${release.applemusic || '#'}" target="_blank" class="overlay-icon" aria-label="Listen on Apple Music">
+                                    <i class="fa-brands fa-apple"></i>
+                                </a>
+                                <a href="${release.beatport || 'https://www.beatport.com/artist/fifth/742392'}" target="_blank" class="overlay-icon" aria-label="View on Beatport">
+                                    <i class="fa-solid fa-b"></i>
+                                </a>
+                            </div>
+                            <div class="release-overlay-info">
+                                ${release.title ? `<p class="release-overlay-track-title">${release.title}</p>` : ''}
+                                <p class="release-overlay-artist">${release.artist}</p>
+                                <h3 class="release-overlay-title">${release.album}</h3>
+                                ${release.year ? `<p class="release-overlay-year">${release.year}</p>` : ''}
+                            </div>
                         </div>
                     </div>
                     <div class="release-info">
-                        <h3 class="release-title">${release.title}</h3>
+                        <h3 class="release-title">${release.artist} - ${release.album}</h3>
                     </div>
                 `;
                 
@@ -108,7 +154,7 @@ function loadAgenda() {
     // Get base path for GitHub Pages compatibility
     const basePath = window.location.pathname.replace('/index.html', '').replace(/\/$/, '');
     
-    fetch(`${basePath}/website/agenda.json`)
+    fetch(`${basePath}/content/agenda.json`)
         .then(response => {
             if (!response.ok) throw new Error('Failed to load agenda');
             return response.json();
@@ -158,35 +204,6 @@ function loadAgenda() {
             }
         });
 }
-
-// Mobile Menu Toggle
-const menuToggle = document.querySelector('.menu-toggle');
-const menuWrapper = document.querySelector('.mobile-menu-wrapper');
-const header = document.querySelector('.header');
-
-menuToggle.onclick = function() {
-    menuToggle.classList.toggle('active');
-    menuWrapper.classList.toggle('active');
-    header.classList.toggle('active');
-    
-    // Prevent body scroll when menu is open
-    if (menuWrapper.classList.contains('active')) {
-        document.body.style.overflow = 'hidden';
-    } else {
-        document.body.style.overflow = '';
-    }
-};
-
-// Close mobile menu when clicking on a link
-const mobileMenuLinks = document.querySelectorAll('.mobile-menu-items a');
-mobileMenuLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        menuToggle.classList.remove('active');
-        menuWrapper.classList.remove('active');
-        header.classList.remove('active');
-        document.body.style.overflow = '';
-    });
-});
 
 // Smooth Scroll for Anchor Links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -288,9 +305,10 @@ document.addEventListener('DOMContentLoaded', () => {
     loadReleases();
     loadAgenda();
     loadBlogPosts();
+    loadAllPosts();
 });
 
-// Blog functionality - Load and display blog posts
+// Blog functionality - Load and display blog posts (for homepage - 3 most recent)
 function loadBlogPosts() {
     const blogGrid = document.getElementById('blog-grid');
     if (!blogGrid) return;
@@ -298,10 +316,13 @@ function loadBlogPosts() {
     // Get base path for GitHub Pages compatibility
     const basePath = window.location.pathname.replace('/index.html', '').replace(/\/$/, '');
     
-    fetch(`${basePath}/website/posts.json`)
+    fetch(`${basePath}/content/posts.json`)
         .then(response => response.json())
         .then(posts => {
-            posts.forEach((post, index) => {
+            // Only show first 3 posts on homepage
+            const recentPosts = posts.slice(0, 3);
+            
+            recentPosts.forEach((post, index) => {
                 const card = document.createElement('a');
                 card.href = `${basePath}/website/post.html?id=${post.id}`;
                 card.className = 'blog-card';
@@ -328,6 +349,64 @@ function loadBlogPosts() {
         .catch(error => console.error('Error loading blog posts:', error));
 }
 
+// Load all posts for posts.html page
+function loadAllPosts() {
+    const postsList = document.getElementById('posts-list');
+    const postsLoading = document.getElementById('posts-loading');
+    
+    if (!postsList) return;
+    
+    // Detect if we're in the website folder
+    const isInWebsiteFolder = window.location.pathname.includes('/website/');
+    const basePath = isInWebsiteFolder ? '..' : '';
+    
+    fetch(`${basePath}/content/posts.json`)
+        .then(response => response.json())
+        .then(posts => {
+            // Hide loading message
+            if (postsLoading) {
+                postsLoading.style.display = 'none';
+            }
+            
+            // Clear any existing content
+            postsList.innerHTML = '';
+            
+            posts.forEach((post, index) => {
+                const postItem = document.createElement('a');
+                postItem.href = `${basePath}/website/post.html?id=${post.id}`;
+                postItem.className = 'post-list-item';
+                postItem.setAttribute('data-aos', 'fade-up');
+                postItem.setAttribute('data-aos-delay', (index * 50).toString());
+                
+                const imagePath = post.image.startsWith('img/') ? `${basePath}/${post.image}` : post.image;
+                
+                postItem.innerHTML = `
+                    <div class="post-list-image">
+                        <img src="${imagePath}" alt="${post.title}">
+                    </div>
+                    <div class="post-list-content">
+                        <h2 class="post-list-title">${post.title}</h2>
+                        <p class="post-list-date">${post.date}</p>
+                        <p class="post-list-excerpt">${post.excerpt}</p>
+                    </div>
+                `;
+                
+                postsList.appendChild(postItem);
+            });
+            
+            // Refresh AOS animations
+            if (typeof AOS !== 'undefined') {
+                AOS.refresh();
+            }
+        })
+        .catch(error => {
+            console.error('Error loading posts:', error);
+            if (postsLoading) {
+                postsLoading.innerHTML = '<p>Error loading posts. Please try again.</p>';
+            }
+        });
+}
+
 // Load individual post on post.html
 if (document.getElementById('post-content')) {
     const urlParams = new URLSearchParams(window.location.search);
@@ -339,7 +418,7 @@ if (document.getElementById('post-content')) {
             ? window.location.pathname.substring(0, window.location.pathname.indexOf('/website/')) 
             : '';
         
-        fetch(`${basePath}/website/posts.json`)
+        fetch(`${basePath}/content/posts.json`)
             .then(response => response.json())
             .then(posts => {
                 const post = posts.find(p => p.id === postId);
@@ -348,7 +427,7 @@ if (document.getElementById('post-content')) {
                     document.title = `${post.title} - FIFTH`;
                     
                     // Load markdown content from blog-posts folder
-                    const markdownPath = `${basePath}/website/blog-posts/${postId}.md`;
+                    const markdownPath = `${basePath}/content/blog-posts/${postId}.md`;
                     fetch(markdownPath)
                         .then(response => response.text())
                         .then(markdown => {
@@ -407,4 +486,158 @@ if (document.getElementById('contact-form')) {
         // Optional: Show success message
         alert('Your email client will open. If it doesn\'t, please send your message to info@fifth.com');
     });
+}
+
+// Load Footer Component
+function loadFooter() {
+    const footerContainer = document.getElementById('footer-container');
+    if (!footerContainer) return;
+    
+    // Detect if we're in a subfolder
+    const isInWebsiteFolder = window.location.pathname.includes('/website/');
+    const footerPath = isInWebsiteFolder ? 'footer.html' : 'website/footer.html';
+    
+    fetch(footerPath)
+        .then(response => {
+            if (!response.ok) throw new Error('Failed to load footer');
+            return response.text();
+        })
+        .then(html => {
+            footerContainer.innerHTML = html;
+            
+            // Fix relative paths based on current location
+            if (!isInWebsiteFolder) {
+                // We're on index.html (root level)
+                const footerLinks = footerContainer.querySelectorAll('.footer-link');
+                footerLinks.forEach(link => {
+                    const href = link.getAttribute('href');
+                    if (href.startsWith('../index.html')) {
+                        // Change ../index.html to just index.html or remove ../
+                        link.href = href.replace('../index.html', 'index.html');
+                    } else if (href === 'biography.html') {
+                        // Change biography.html to website/biography.html
+                        link.href = 'website/biography.html';
+                    }
+                });
+            }
+            
+            // Apply config to footer links
+            applyConfig();
+        })
+        .catch(error => {
+            console.error('Error loading footer:', error);
+        });
+}
+
+// Initialize footer when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadFooter);
+} else {
+    loadFooter();
+}
+
+// Load Header Component
+function loadHeader() {
+    const headerContainer = document.getElementById('header-container');
+    if (!headerContainer) return;
+    
+    // Detect if we're in a subfolder
+    const isInWebsiteFolder = window.location.pathname.includes('/website/');
+    const headerPath = isInWebsiteFolder ? 'header.html' : 'website/header.html';
+    
+    fetch(headerPath)
+        .then(response => {
+            if (!response.ok) throw new Error('Failed to load header');
+            return response.text();
+        })
+        .then(html => {
+            headerContainer.innerHTML = html;
+            
+            // Fix relative paths based on current location
+            if (!isInWebsiteFolder) {
+                // We're on index.html (root level)
+                const logoLink = headerContainer.querySelector('.header-logo-link');
+                if (logoLink) {
+                    logoLink.href = 'index.html';
+                }
+                
+                const logoImages = headerContainer.querySelectorAll('.logo img');
+                logoImages.forEach(img => {
+                    img.src = img.src.replace('../svg/', 'svg/');
+                });
+                
+                const navLinks = headerContainer.querySelectorAll('.header-nav-link');
+                navLinks.forEach(link => {
+                    const href = link.getAttribute('href');
+                    if (href.startsWith('../index.html')) {
+                        link.href = href.replace('../index.html', 'index.html');
+                    } else if (href === 'biography.html') {
+                        link.href = 'website/biography.html';
+                    }
+                });
+            }
+            
+            // Re-initialize menu toggle functionality after header is loaded
+            initializeMenuToggle();
+            
+            // Apply config to header links
+            applyConfig();
+        })
+        .catch(error => {
+            console.error('Error loading header:', error);
+        });
+}
+
+// Menu toggle functionality (extracted to be reusable)
+function initializeMenuToggle() {
+    const menuToggle = document.querySelector('.menu-toggle');
+    const mobileMenuWrapper = document.querySelector('.mobile-menu-wrapper');
+    const logo = document.querySelector('.logo');
+    
+    if (!menuToggle || !mobileMenuWrapper) return;
+    
+    // Remove existing listeners to avoid duplicates
+    const newMenuToggle = menuToggle.cloneNode(true);
+    menuToggle.parentNode.replaceChild(newMenuToggle, menuToggle);
+    
+    newMenuToggle.addEventListener('click', function() {
+        this.classList.toggle('active');
+        mobileMenuWrapper.classList.toggle('active');
+        document.body.classList.toggle('menu-open');
+        if (logo) {
+            logo.classList.toggle('menu-open');
+        }
+    });
+    
+    // Close menu when clicking on a link
+    const menuLinks = document.querySelectorAll('.mobile-menu-items a');
+    menuLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            newMenuToggle.classList.remove('active');
+            mobileMenuWrapper.classList.remove('active');
+            document.body.classList.remove('menu-open');
+            if (logo) {
+                logo.classList.remove('menu-open');
+            }
+        });
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!newMenuToggle.contains(e.target) && !mobileMenuWrapper.contains(e.target)) {
+            newMenuToggle.classList.remove('active');
+            mobileMenuWrapper.classList.remove('active');
+            document.body.classList.remove('menu-open');
+            if (logo) {
+                logo.classList.remove('menu-open');
+            }
+        }
+    });
+}
+
+// Initialize header when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadHeader);
+} else {
+    loadHeader();
 }

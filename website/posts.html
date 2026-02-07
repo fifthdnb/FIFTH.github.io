@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="All updates and news from FIFTH - Drum & Bass Artist">
+    <meta property="og:title" content="All Posts - FIFTH">
+    <meta property="og:description" content="Read all updates and news from FIFTH">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.fifth.nu/posts.html">
+    <meta property="og:image" content="https://www.fifth.nu/svg/fifth_LOGO_2.svg">
+    
+    <title>All Posts - FIFTH</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="../svg/fifth_LOGO_2.svg">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="main-body">
+    <div class="main-div">
+        <!-- Header will be loaded here -->
+        <div id="header-container"></div>
+
+        <main>
+            <!-- All Posts Section -->
+            <section class="section blog-section" style="padding-top: 120px;">
+                <div class="page-content">
+                    <h1 class="section-title" data-aos="fade-up">All Posts</h1>
+                    
+                    <div class="posts-list" id="posts-list">
+                        <!-- Posts will be loaded here by JavaScript -->
+                    </div>
+                    <div class="posts-loading" id="posts-loading">
+                        <i class="fa-solid fa-spinner fa-spin"></i> Loading posts...
+                    </div>
+                </div>
+            </section>
+        </main>
+        <!-- Footer will be loaded here -->
+        <div id="footer-container"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+    </script>
+</body>
+</html>
