@@ -349,8 +349,9 @@ function loadBlogPosts() {
                 card.setAttribute('data-aos', 'fade-zoom-in');
                 card.setAttribute('data-aos-delay', (index * 100).toString());
                 
+                const imageSrc = basePath ? `${basePath}/${post.image}` : `./${post.image}`;
                 card.innerHTML = `
-                    <img src="${basePath}/${post.image}" alt="${post.title}" class="blog-card-image">
+                    <img src="${imageSrc}" alt="${post.title}" class="blog-card-image">
                     <div class="blog-card-content">
                         <h2 class="blog-card-title">${post.title}</h2>
                         <p class="blog-card-date">${post.date}</p>
