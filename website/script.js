@@ -661,3 +661,37 @@ if (document.readyState === 'loading') {
 } else {
     loadHeader();
 }
+
+// Fix all paths for GitHub Pages on subpages
+if (window.location.pathname.includes('/website/')) {
+    document.addEventListener('DOMContentLoaded', () => {
+        const basePath = getBasePath();
+        
+        // Fix all images with relative paths
+        document.querySelectorAll('img[src^="../"]').forEach(img => {
+            const src = img.getAttribute('src');
+            if (src.startsWith('../')) {
+                const newSrc = src.replace('../', basePath + '/');
+                img.src = newSrc;
+            }
+        });
+        
+        // Fix all links with relative paths
+        document.querySelectorAll('link[href^="../"]').forEach(link => {
+            const href = link.getAttribute('href');
+            if (href.startsWith('../')) {
+                const newHref = href.replace('../', basePath + '/');
+                link.href = newHref;
+            }
+        });
+        
+        // Fix all CSS background images
+        document.querySelectorAll('[style*="background-image"]').forEach(el => {
+            const style = el.getAttribute('style');
+            if (style && style.includes('../')) {
+                const newStyle = style.replace(/\.\.\/img\//g, basePath + '/img/');
+                el.setAttribute('style', newStyle);
+            }
+        });
+    });
+}
