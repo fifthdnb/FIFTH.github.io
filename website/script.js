@@ -1,10 +1,11 @@
 // Hero Slideshow
+const basePath = window.location.pathname.replace('/index.html', '').replace(/\/$/, '');
 const heroImages = [
-    'img/DSC01392.jpg',
-    'img/DSC01428.jpg',
-    'img/DSC01595.jpg',
-    'img/DSC01632.jpg',
-    'img/DSC01647.jpg'
+    `${basePath}/img/DSC01392.jpg`,
+    `${basePath}/img/DSC01428.jpg`,
+    `${basePath}/img/DSC01595.jpg`,
+    `${basePath}/img/DSC01632.jpg`,
+    `${basePath}/img/DSC01647.jpg`
 ];
 
 let currentImageIndex = 0;
@@ -36,7 +37,10 @@ function loadReleases() {
     
     if (!releasesGrid) return;
     
-    fetch('website/releases.json')
+    // Get base path for GitHub Pages compatibility
+    const basePath = window.location.pathname.replace('/index.html', '').replace(/\/$/, '');
+    
+    fetch(`${basePath}/website/releases.json`)
         .then(response => {
             if (!response.ok) throw new Error('Failed to load releases');
             return response.json();
@@ -59,7 +63,7 @@ function loadReleases() {
                 
                 card.innerHTML = `
                     <div class="release-image-wrapper">
-                        <img src="${release.image}" alt="${release.title}" class="release-image" loading="lazy">
+                        <img src="${basePath}/${release.image}" alt="${release.title}" class="release-image" loading="lazy">
                         <div class="release-overlay">
                             <a href="https://open.spotify.com/artist/2nkPDrBTpqCFWeK3ZMLmlF" target="_blank" class="overlay-icon" aria-label="Listen on Spotify">
                                 <i class="fa-brands fa-spotify"></i>
@@ -97,7 +101,10 @@ function loadAgenda() {
     
     if (!agendaEvents) return;
     
-    fetch('website/agenda.json')
+    // Get base path for GitHub Pages compatibility
+    const basePath = window.location.pathname.replace('/index.html', '').replace(/\/$/, '');
+    
+    fetch(`${basePath}/website/agenda.json`)
         .then(response => {
             if (!response.ok) throw new Error('Failed to load agenda');
             return response.json();
@@ -262,18 +269,21 @@ function loadBlogPosts() {
     const blogGrid = document.getElementById('blog-grid');
     if (!blogGrid) return;
     
-    fetch('website/posts.json')
+    // Get base path for GitHub Pages compatibility
+    const basePath = window.location.pathname.replace('/index.html', '').replace(/\/$/, '');
+    
+    fetch(`${basePath}/website/posts.json`)
         .then(response => response.json())
         .then(posts => {
             posts.forEach((post, index) => {
                 const card = document.createElement('a');
-                card.href = `website/post.html?id=${post.id}`;
+                card.href = `${basePath}/website/post.html?id=${post.id}`;
                 card.className = 'blog-card';
                 card.setAttribute('data-aos', 'fade-zoom-in');
                 card.setAttribute('data-aos-delay', (index * 100).toString());
                 
                 card.innerHTML = `
-                    <img src="${post.image}" alt="${post.title}" class="blog-card-image">
+                    <img src="${basePath}/${post.image}" alt="${post.title}" class="blog-card-image">
                     <div class="blog-card-content">
                         <h2 class="blog-card-title">${post.title}</h2>
                         <p class="blog-card-date">${post.date}</p>
@@ -298,7 +308,12 @@ if (document.getElementById('post-content')) {
     const postId = urlParams.get('id');
     
     if (postId) {
-        fetch('posts.json')
+        // Get base path for GitHub Pages compatibility
+        const basePath = window.location.pathname.includes('/website/') 
+            ? window.location.pathname.substring(0, window.location.pathname.indexOf('/website/')) 
+            : '';
+        
+        fetch(`${basePath}/website/posts.json`)
             .then(response => response.json())
             .then(posts => {
                 const post = posts.find(p => p.id === postId);
@@ -306,15 +321,15 @@ if (document.getElementById('post-content')) {
                     // Update page title
                     document.title = `${post.title} - FIFTH`;
                     
-                    // Load markdown content from blog-posts folder (relative to website folder)
-                    const markdownPath = `blog-posts/${postId}.md`;
+                    // Load markdown content from blog-posts folder
+                    const markdownPath = `${basePath}/website/blog-posts/${postId}.md`;
                     fetch(markdownPath)
                         .then(response => response.text())
                         .then(markdown => {
                             const postContent = document.getElementById('post-content');
                             
-                            // Fix image path for post.html (needs ../ since it's in website folder)
-                            const imagePath = post.image.startsWith('img/') ? '../' + post.image : post.image;
+                            // Fix image path for post.html
+                            const imagePath = post.image.startsWith('img/') ? `${basePath}/${post.image}` : post.image;
                             
                             // Create post header with image, title and date
                             const postHeader = `
@@ -332,10 +347,16 @@ if (document.getElementById('post-content')) {
                                 postContent.innerHTML = postHeader + markdown.replace(/\n/g, '<br>');
                             }
                         })
-                        .catch(error => console.error('Error loading post content:', error));
+                        .catch(error => {
+                            console.error('Error loading post content:', error);
+                            document.getElementById('post-content').innerHTML = '<p>Error loading post content. Please try again.</p>';
+                        });
                 }
             })
-            .catch(error => console.error('Error loading posts:', error));
+            .catch(error => {
+                console.error('Error loading posts:', error);
+                document.getElementById('post-content').innerHTML = '<p>Error loading posts. Please try again.</p>';
+            });
     }
 }
 
