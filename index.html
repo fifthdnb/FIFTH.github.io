@@ -175,16 +175,6 @@
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="website/script.js"></script>
-    <script>
-        // Fix paths for GitHub Pages immediately when page loads
-        if (window.location.hostname === 'fifthdnb.github.io') {
-            const basePath = '/FIFTH-Website';
-            // Fix all img tags with svg/ or img/ paths
-            document.querySelectorAll('img[src^="svg/"], img[src^="img/"]').forEach(img => {
-                img.src = basePath + '/' + img.getAttribute('src');
-            });
-        }
-    </script>
 </body>
 </html>
 
