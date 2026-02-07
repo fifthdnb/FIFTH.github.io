@@ -37,10 +37,12 @@ function loadReleases() {
     
     if (!releasesGrid) return;
     
-    // Get base path for GitHub Pages compatibility
-    const basePath = window.location.pathname.replace('/index.html', '').replace(/\/$/, '');
+    // Detect if we're on the homepage or music.html page
+    const isInWebsiteFolder = window.location.pathname.includes('/website/');
+    const basePath = isInWebsiteFolder ? '..' : (window.location.pathname.replace('/index.html', '').replace(/\/$/, ''));
+    const jsonPath = isInWebsiteFolder ? 'releases.json' : `${basePath}/website/releases.json`;
     
-    fetch(`${basePath}/website/releases.json`)
+    fetch(jsonPath)
         .then(response => {
             if (!response.ok) throw new Error('Failed to load releases');
             return response.json();
@@ -63,7 +65,7 @@ function loadReleases() {
                 
                 card.innerHTML = `
                     <div class="release-image-wrapper">
-                        <img src="${basePath}/${release.image}" alt="${release.title}" class="release-image" loading="lazy">
+                        <img src="${isInWebsiteFolder ? '../' : basePath + '/'}${release.image}" alt="${release.title}" class="release-image" loading="lazy">
                         <div class="release-overlay">
                             <a href="https://open.spotify.com/artist/2nkPDrBTpqCFWeK3ZMLmlF" target="_blank" class="overlay-icon" aria-label="Listen on Spotify">
                                 <i class="fa-brands fa-spotify"></i>

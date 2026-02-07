@@ -275,13 +275,14 @@ a:active, button:active {
     position: relative;
     display: block;
     width: 100px;
-    height: auto;
+    height: 58px;
 }
 
 .logo img {
     display: block;
-    width: 100%;
-    height: auto;
+    width: 100px;
+    height: 58px;
+    object-fit: contain;
     transition: opacity 0.5s ease;
 }
 
@@ -374,10 +375,10 @@ a:active, button:active {
 }
 
 .header.scrolled {
-    background: rgba(10, 10, 10, 0.95);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: none;
 }
 
 .main-body {

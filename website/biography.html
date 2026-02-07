@@ -62,9 +62,7 @@
         <main>
             <!-- Hero Section -->
             <section class="hero-section" style="height: 50vh; min-height: 400px;">
-                <div class="hero-slideshow">
-                    <img src="../img/DSC01392.jpg" alt="FIFTH" class="active">
-                </div>
+                <img src="../img/DSC01647.jpg" alt="FIFTH" style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;">
                 <div class="hero-overlay"></div>
                 <div class="hero-content">
                     <img src="../svg/fifth_LOGO_2.svg" alt="FIFTH" class="hero-logo" data-aos="fade-up">
@@ -78,7 +76,7 @@
                     
                     <div class="biography-split" data-aos="fade-up" data-aos-delay="100">
                         <div class="bio-image-wrapper">
-                            <img src="../img/DSC01392.jpg" alt="FIFTH Portrait" class="bio-main-image" loading="lazy">
+                            <img src="../img/DSC01595.jpg" alt="FIFTH Portrait" class="bio-main-image" loading="lazy">
                         </div>
                         <div class="bio-text-wrapper">
                             <div class="bio-card">
@@ -131,5 +129,15 @@
     </div>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="script.js"></script>
+    <script>
+        // Initialize AOS
+        if (typeof AOS !== 'undefined') {
+            AOS.init({
+                duration: 1000,
+                once: true,
+                offset: 100
+            });
+        }
+    </script>
 </body>
 </html>
