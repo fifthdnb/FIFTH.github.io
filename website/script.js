@@ -1,6 +1,6 @@
 // Hero Slideshow
-const basePath = window.location.pathname.includes('/FIFTH-Website/') 
-    ? '/FIFTH-Website' 
+const basePath = window.location.pathname.includes('/FIFTH.github.io/') 
+    ? '/FIFTH.github.io' 
     : '';
 
 // Apply configuration to all links with data attributes
@@ -280,8 +280,8 @@ if (typeof AOS !== 'undefined') {
 
 // Load releases and agenda on page load
 document.addEventListener('DOMContentLoaded', () => {
-    const basePath = window.location.pathname.includes('/FIFTH-Website/') 
-        ? '/FIFTH-Website' 
+    const basePath = window.location.pathname.includes('/FIFTH.github.io/') 
+        ? '/FIFTH.github.io' 
         : '';
     
     // Fix logo images for GitHub Pages
