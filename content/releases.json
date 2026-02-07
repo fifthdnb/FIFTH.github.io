@@ -1,0 +1,48 @@
+{
+  "releases": [
+    {
+      "image": "img/release/FIFTH - Traverse.jpg",
+      "title": "Traverse",
+      "artist": "FIFTH",
+      "album": "Traverse - Single",
+      "year": "2024",
+      "spotify": "https://open.spotify.com/track/4TH1SqdsekQdkbPJtdq4cR?si=3943b115d9eb47a1",
+      "soundcloud": "https://soundcloud.com/fifthdnb/sets/traverse",
+      "beatport": "https://www.beatport.com/nl/track/traverse/19819270",
+      "applemusic": "https://music.apple.com/nl/album/traverse/1781724829?i=1781724835"
+    },
+    {
+      "image": "img/release/FIFTH - Echoes.jpg",
+      "title": "Echoes",
+      "artist": "FIFTH",
+      "album": "Echoes - Single",
+      "year": "2024",
+      "spotify": "https://open.spotify.com/track/76rwtmr9k4N31ZnMjdT6ur?si=9830057e49b242e1",
+      "soundcloud": "https://soundcloud.com/fifthdnb/echoes",
+      "beatport": "https://www.beatport.com/nl/track/echoes/19819271",
+      "applemusic": "https://music.apple.com/nl/album/echoes-single/1771541606"
+    },
+    {
+      "image": "img/release/TRANS_T, FIFTH - Cycles.jpg",
+      "title": "Cycles",
+      "artist": "TRANS:T & FIFTH",
+      "album": "VA2 PIONEER",
+      "year": "2025",
+      "spotify": "https://open.spotify.com/album/2GwTCR2rmZiOhG8AMUyUaP?si=FZavokCKQlCKofkZbQmOSQ",
+      "soundcloud": "https://soundcloud.com/transit_official/transit-fifth-cycles",
+      "beatport": "https://www.beatport.com/nl/track/cycles/21819120",
+      "applemusic": "https://music.apple.com/nl/album/cycles/1840757449?i=1840757454"
+    },
+    {
+      "image": "img/release/FIFTH - Sonder.jpg",
+      "title": "Sonder",
+      "artist": "FIFTH",
+      "album": "Adaptations, Gen. IV - EP",
+      "year": "2024",
+      "spotify": "https://open.spotify.com/album/0kERO5SLV8HwxuY7tE9TCe?si=BsgHRJavQnOC5EJ3ZpMpdA",
+      "soundcloud": "https://soundcloud.com/blackoutmusicnl/fifthsonder",
+      "beatport": "https://www.beatport.com/nl/track/sonder/19906833",
+      "applemusic": "https://music.apple.com/nl/album/sonder/1780566691?i=1780566947"
+    }
+  ]
+}

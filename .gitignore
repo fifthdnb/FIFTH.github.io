@@ -1,2 +1,24 @@
 *.afdesign
 *.afdesign~lock~
+
+
+# voor een specifiek bestand: 
+# /path/to/file.txt
+# voor een hele map:
+# /path/to/folder/
+# voor alle bestanden van een bepaald type:
+# *.log
+# voor alle bestanden in de hoofdmap, maar niet in submappen:
+# /*.txt    
+# voor alle bestanden in de hoofdmap en submappen:
+# **/*.txt
+# voor alle bestanden in de hoofdmap, maar niet in submappen:
+# /*.txt
+# negeer alle bestanden behalve die in de hoofdmap:
+# /*
+# negeer alle bestanden behalve die in de hoofdmap en submappen:
+# /*/*
+# negeer alle bestanden behalve die in de hoofdmap en submappen:
+# /*/*/*
+# negeer alle bestanden behalve die in de hoofdmap en submappen:
+# /*/*/*/*
