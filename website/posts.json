@@ -1,0 +1,26 @@
+[
+  {
+    "id": "new-chapter",
+    "title": "Welcome to FIFTH",
+    "date": "26 January 2026",
+    "excerpt": "Welcome to the official FIFTH website! We're excited to share this new platform with you where you can find everything about our music, shows, and the latest updates.",
+    "image": "../img/DSC01647.jpg",
+    "file": "blog-posts/new-chapter.md"
+  },
+  {
+    "id": "studio-sessions",
+    "title": "Back in the Studio",
+    "date": "20 January 2026",
+    "excerpt": "The past few weeks have been all about experimentation and pushing creative boundaries. We've been diving deep into new production techniques and sound design.",
+    "image": "../img/DSC01632.jpg",
+    "file": "blog-posts/studio-sessions.md"
+  },
+  {
+    "id": "upcoming-shows",
+    "title": "Upcoming Shows & Tour Dates",
+    "date": "15 January 2026",
+    "excerpt": "The stage is calling, and we're ready to answer! After months of studio time, it's time to bring these tracks to life in front of a crowd.",
+    "image": "../img/DSC01428.jpg",
+    "file": "blog-posts/upcoming-shows.md"
+  }
+]

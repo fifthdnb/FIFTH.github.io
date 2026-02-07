@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore all music releases from FIFTH - Drum & Bass Artist">
+    <meta property="og:title" content="Music - FIFTH">
+    <meta property="og:description" content="Listen to all releases from FIFTH - From Traverse EP to the latest tracks.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.fifth.nu/music.html">
+    <meta property="og:image" content="https://www.fifth.nu/svg/fifth_LOGO_2.svg">
+    
+    <title>Music - FIFTH</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="../svg/fifth_LOGO_2.svg">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="main-body">
+    <div class="main-div">
+        <div class="header">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="../svg/fifth_LOGO_2.svg" alt="FIFTH Logo" class="logo-black" style="width: 100px; height: auto;">
+                    <img src="../svg/fifth_LOGO_2_WHITE.svg" alt="FIFTH Logo" class="logo-white" style="width: 100px; height: auto;">
+                </a>
+            </div>
+            
+            <nav>
+                <button class="menu-toggle" aria-label="Open menu">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+                <div class="mobile-menu-wrapper">
+                    <ul class="mobile-menu-items">
+                        <li><a href="index.html#music">Music</a></li>
+                        <li><a href="index.html#agenda">Agenda</a></li>
+                        <li><a href="index.html#updates">Updates</a></li>
+                        <li><a href="biography.html">Biography</a></li>
+                    </ul>
+                    <div class="mobile-menu-socials">
+                        <a href="https://open.spotify.com/artist/2nkPDrBTpqCFWeK3ZMLmlF" target="_blank" aria-label="Spotify"><i class="fa-brands fa-spotify"></i></a>
+                        <a href="#" target="_blank" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="https://www.instagram.com/fifthdnb" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://soundcloud.com/fifthdnb" target="_blank" aria-label="SoundCloud"><i class="fa-brands fa-soundcloud"></i></a>
+                        <a href="#" target="_blank" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="https://www.beatport.com/artist/fifth/742392" target="_blank" aria-label="Beatport"><i class="fa-solid fa-b"></i></a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        <main>
+            <!-- Music Section -->
+            <section class="section music-section" style="padding-top: 120px;">
+                <div class="page-content">
+                    <h1 class="section-title" data-aos="fade-up">All Releases</h1>
+                    
+                    <div class="releases-grid" id="releases-grid">
+                        <!-- Releases will be loaded here by JavaScript -->
+                    </div>
+                    <div class="releases-loading" id="releases-loading">
+                        <i class="fa-solid fa-spinner fa-spin"></i> Loading releases...
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <div class="footer-left">
+                <div>SITEMAP</div>
+                <ul>
+                    <li><a href="index.html#music">MUSIC</a></li>
+                    <li><a href="index.html#agenda">AGENDA</a></li>
+                    <li><a href="index.html#updates">UPDATES</a></li>
+                    <li><a href="biography.html">BIOGRAPHY</a></li>
+                    <li><a href="#">SOCIALS</a></li>
+                </ul>
+            </div>  
+            <div class="footer-center">
+                <div>LINKS</div>
+                <ul>
+                    <li><a href="#" target="_blank">BEATPORT</a></li>
+                    <li><a href="#" target="_blank">INSTAGRAM</a></li>
+                    <li><a href="#" target="_blank">YOUTUBE</a></li>
+                    <li><a href="#" target="_blank">SPOTIFY</a></li>
+                    <li><a href="#" target="_blank">SOUNDCLOUD</a></li>
+                </ul>
+            </div>
+            <div class="footer-right">
+                <div><strong>FIFTH</strong></div>
+                <div>Bookings &amp; Management</div>
+                <div><a href="mailto:info@fifth.com">info@fifth.com</a></div>
+                <div><a href="https://www.fifth.nu" target="_blank">www.fifth.nu</a></div>
+                <div><a href="index.html">Electronic Press Kit</a></div>
+            </div>
+        </footer>
+        <div class="footer-bottom">
+            <p class="footer-copyright">&copy; 2026 FIFTH. All rights reserved.</p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+    </script>
+</body>
+</html>

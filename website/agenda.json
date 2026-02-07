@@ -1,0 +1,32 @@
+{
+  "events": [
+    {
+      "day": "15",
+      "month": "MAR",
+      "eventName": "Mysteryland",
+      "location": "Amsterdam, NL",
+      "ticketUrl": "https://www.mysteryland.com"
+    },
+    {
+      "day": "22",
+      "month": "MAR",
+      "eventName": "Club AIR",
+      "location": "Amsterdam, NL",
+      "ticketUrl": "https://www.air.nl"
+    },
+    {
+      "day": "05",
+      "month": "APR",
+      "eventName": "Pacha Ibiza",
+      "location": "Ibiza, ES",
+      "ticketUrl": "https://www.pacha.com"
+    },
+    {
+      "day": "18",
+      "month": "APR",
+      "eventName": "Fabric London",
+      "location": "London, UK",
+      "ticketUrl": "https://www.fabriclondon.com"
+    }
+  ]
+}
