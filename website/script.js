@@ -1,7 +1,14 @@
 // Hero Slideshow
-const basePath = window.location.pathname.includes('/FIFTH.github.io/') 
-    ? '/FIFTH.github.io' 
-    : '';
+// Detect base path based on current location
+function getBasePath() {
+    const path = window.location.pathname;
+    if (path.includes('/FIFTH.github.io/')) {
+        return '/FIFTH.github.io';
+    }
+    return '';
+}
+
+const basePath = getBasePath();
 
 // Apply configuration to all links with data attributes
 function applyConfig() {
@@ -36,10 +43,10 @@ function applyConfig() {
 }
 
 const heroImages = [
-    `${basePath ? basePath + '/' : './'}img/Homepage_1.JPG`,
-    `${basePath ? basePath + '/' : './'}img/Homepage_2.JPG`,
-    `${basePath ? basePath + '/' : './'}img/Homepage_3.JPG`,
-    `${basePath ? basePath + '/' : './'}img/Homepage_4.JPG`,
+    `${basePath}/img/Homepage_1.JPG`,
+    `${basePath}/img/Homepage_2.JPG`,
+    `${basePath}/img/Homepage_3.JPG`,
+    `${basePath}/img/Homepage_4.JPG`,
 ];
 
 let currentImageIndex = 0;
@@ -73,7 +80,7 @@ function loadReleases() {
     
     // Detect if we're on the homepage or music.html page
     const isInWebsiteFolder = window.location.pathname.includes('/website/');
-    const basePath = isInWebsiteFolder ? '..' : '.';
+    const basePath = isInWebsiteFolder ? '..' : getBasePath();
     const jsonPath = isInWebsiteFolder ? '../content/releases.json' : `${basePath}/content/releases.json`;
     
     fetch(jsonPath)
@@ -152,7 +159,7 @@ function loadAgenda() {
     if (!agendaEvents) return;
     
     // Get base path for GitHub Pages compatibility
-    const basePath = '.';
+    const basePath = getBasePath();
     
     fetch(`${basePath}/content/agenda.json`)
         .then(response => {
@@ -280,9 +287,7 @@ if (typeof AOS !== 'undefined') {
 
 // Load releases and agenda on page load
 document.addEventListener('DOMContentLoaded', () => {
-    const basePath = window.location.pathname.includes('/FIFTH.github.io/') 
-        ? '/FIFTH.github.io' 
-        : '';
+    const basePath = getBasePath();
     
     // Fix favicon
     const favicon = document.getElementById('favicon');
@@ -306,8 +311,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const logoImages = document.querySelectorAll('.logo img');
     logoImages.forEach(img => {
         const src = img.getAttribute('src');
-        if (src && src.startsWith('svg/')) {
-            img.src = basePath ? `${basePath}/${src}` : src;
+        if (src && src.startsWith('../svg/')) {
+            img.src = `${basePath}/${src.replace('../', '')}`;
         }
     });
     
@@ -329,7 +334,7 @@ function loadBlogPosts() {
     if (!blogGrid) return;
     
     // Get base path for GitHub Pages compatibility
-    const basePath = '.';
+    const basePath = getBasePath();
     
     fetch(`${basePath}/content/posts.json`)
         .then(response => response.json())
