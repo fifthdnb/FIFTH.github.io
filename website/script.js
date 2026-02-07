@@ -36,10 +36,10 @@ function applyConfig() {
 }
 
 const heroImages = [
-    `${basePath ? basePath + '/' : './'}img/Homepage_1.jpg`,
-    `${basePath ? basePath + '/' : './'}img/Homepage_2.jpg`,
-    `${basePath ? basePath + '/' : './'}img/Homepage_3.jpg`,
-    `${basePath ? basePath + '/' : './'}img/Homepage_4.jpg`,
+    `${basePath ? basePath + '/' : './'}img/Homepage_1.JPG`,
+    `${basePath ? basePath + '/' : './'}img/Homepage_2.JPG`,
+    `${basePath ? basePath + '/' : './'}img/Homepage_3.JPG`,
+    `${basePath ? basePath + '/' : './'}img/Homepage_4.JPG`,
 ];
 
 let currentImageIndex = 0;
