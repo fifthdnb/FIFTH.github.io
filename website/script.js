@@ -107,26 +107,32 @@ function loadReleases() {
                 card.innerHTML = `
                     <div class="release-image-wrapper">
                         <img src="${isInWebsiteFolder ? '../' : basePath + '/'}${release.image}" alt="${release.artist} - ${release.album}" class="release-image" loading="lazy">
-                        <div class="release-overlay">
-                            <div class="overlay-icons">
-                                <a href="${release.spotify || 'https://open.spotify.com/artist/2nkPDrBTpqCFWeK3ZMLmlF'}" target="_blank" class="overlay-icon" aria-label="Listen on Spotify">
-                                    <i class="fa-brands fa-spotify"></i>
-                                </a>
-                                <a href="${release.soundcloud || '#'}" target="_blank" class="overlay-icon" aria-label="Listen on SoundCloud">
-                                    <i class="fa-brands fa-soundcloud"></i>
-                                </a>
-                                <a href="${release.applemusic || '#'}" target="_blank" class="overlay-icon" aria-label="Listen on Apple Music">
-                                    <i class="fa-brands fa-apple"></i>
-                                </a>
-                                <a href="${release.beatport || 'https://www.beatport.com/artist/fifth/742392'}" target="_blank" class="overlay-icon" aria-label="View on Beatport">
-                                    <i class="fa-solid fa-b"></i>
-                                </a>
+                        <div class="release-overlay release-overlay-info-layer">
+                            <div class="overlay-content">
+                                <div class="release-overlay-info">
+                                    ${release.title ? `<p class="release-overlay-track-title">${release.title}</p>` : ''}
+                                    <p class="release-overlay-artist">${release.artist}</p>
+                                    <h3 class="release-overlay-title">${release.album}</h3>
+                                    ${release.year ? `<p class="release-overlay-year">${release.year}</p>` : ''}
+                                </div>
                             </div>
-                            <div class="release-overlay-info">
-                                ${release.title ? `<p class="release-overlay-track-title">${release.title}</p>` : ''}
-                                <p class="release-overlay-artist">${release.artist}</p>
-                                <h3 class="release-overlay-title">${release.album}</h3>
-                                ${release.year ? `<p class="release-overlay-year">${release.year}</p>` : ''}
+                        </div>
+                        <div class="release-overlay release-overlay-links-layer">
+                            <div class="overlay-content">
+                                <div class="overlay-icons">
+                                    <a href="${release.spotify || 'https://open.spotify.com/artist/2nkPDrBTpqCFWeK3ZMLmlF'}" target="_blank" class="overlay-icon" aria-label="Listen on Spotify">
+                                        <i class="fa-brands fa-spotify"></i>
+                                    </a>
+                                    <a href="${release.soundcloud || '#'}" target="_blank" class="overlay-icon" aria-label="Listen on SoundCloud">
+                                        <i class="fa-brands fa-soundcloud"></i>
+                                    </a>
+                                    <a href="${release.applemusic || '#'}" target="_blank" class="overlay-icon" aria-label="Listen on Apple Music">
+                                        <i class="fa-brands fa-apple"></i>
+                                    </a>
+                                    <a href="${release.beatport || 'https://www.beatport.com/artist/fifth/742392'}" target="_blank" class="overlay-icon" aria-label="View on Beatport">
+                                        <i class="fa-solid fa-b"></i>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -134,6 +140,17 @@ function loadReleases() {
                         <h3 class="release-title">${release.artist} - ${release.album}</h3>
                     </div>
                 `;
+                
+                // Add click event to toggle between info and links
+                const imageWrapper = card.querySelector('.release-image-wrapper');
+                imageWrapper.addEventListener('click', function(e) {
+                    // Don't toggle if clicking on a link
+                    if (e.target.closest('.overlay-icon')) {
+                        return;
+                    }
+                    e.preventDefault();
+                    card.classList.toggle('show-links');
+                });
                 
                 releasesGrid.appendChild(card);
             });
